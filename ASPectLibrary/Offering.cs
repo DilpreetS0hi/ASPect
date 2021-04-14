@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,7 +27,6 @@ namespace ASPectLibrary
         [ForeignKey("CourseID")]
         public Course Course { get; set; }
 
-        public ICollection<Project> Projects { get; set; } 
     }
 }
 

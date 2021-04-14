@@ -35,7 +35,7 @@ namespace Web.Controllers
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 
             };
-            var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).Include(i => i.Memberships).ThenInclude(m => m.Project).ToListAsync(), options);
+            var projJson = JsonConvert.SerializeObject(await _context.Projects.Include(i => i.Memberships).ThenInclude(m => m.Student).Include(i=>i.Course).Include(i=>i.ProjectCategory).ToListAsync(), options);
             //Console.WriteLine("json: " + projJson);
             List<Project> projDeserialized = System.Text.Json.JsonSerializer.Deserialize<List<Project>>(projJson);
             return projDeserialized;

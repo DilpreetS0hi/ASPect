@@ -8,6 +8,7 @@ import TextInputLiveFeedback from "../components/TextInputLiveFeedback";
 import { nameRegex, emailRegex, passwordRegex } from "../util/regex";
 import bcrypt from "bcryptjs";
 import axios from "axios";
+import url from "../config";
 
 const schema = Yup.object({
   email: Yup.string()
@@ -75,8 +76,8 @@ const Signup = () => {
       values.normalizedEmail = values.email.toUpperCase();
       const passwordHash = await bcrypt.hash(values.password, 10);
       values.passwordHash = passwordHash;
-      console.log(values);
-
+       console.log(values);
+       console.log(url);
       const result = await axios.get(
         "https://localhost:5001/api/Student",
         config

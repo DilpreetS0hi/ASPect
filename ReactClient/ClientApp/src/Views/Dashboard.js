@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Container, Button, Table } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LinkContainer } from "react-router-bootstrap";
 
-export const Dashboard = (props) => {
-  const [assignments, setAssignments] = useState([]);
+export const Dashboard = ({ studentId }) => {
   const authenticated =
     localStorage.getItem("id") &&
     localStorage.getItem("token") &&
@@ -35,56 +34,53 @@ export const Dashboard = (props) => {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
-  
-  const getData = async () => {
-    console.log(props);
-        const { data } = await axios.get(`https://localhost:5001/api/Assignment/`);
-        setAssignments(data);
-    
-  }
 
   useEffect(() => {
-    getData()
-  }, []);
+    if (studentId !== null) {
+      const getUserInfo = async () => {
+        const { data } = await axios.get(`/api/Student/${studentId}`);
+        console.log(data);
+        const { firstName, lastName, userName } = data;
+        setUserInfo({
+          firstName: firstName,
+          lastName: lastName,
+          userName: userName,
+        });
+      };
+      getUserInfo();
+    }
+  }, [studentId]);
 
   const { firstName, lastName, userName } = userInfo;
-  const renderAssignments = () => {
-    return assignments.map((a) => (
-          <tr>
-            <td>{a.courseId}</td>
-            <td>{a.description}</td>
-            <td>{a.dateCreated}</td>
-            <td>{a.dueDate}</td>
-            </tr>
-        ),);
-      
-  }
+
   return (
     <Container>
       <h3>Dashboard</h3>
-      
       <p className="mt-4 ml-2">
-        Hello, <strong>{localStorage.getItem("name")}.</strong>
+        Hello, <strong>{`${firstName} ${lastName}`}.</strong>
       </p>
       <p className="mt-4 ml-2">
-        Your email address: <em>{localStorage.getItem("email")}.</em>
+        Your email address: <em>{userName}</em>.
       </p>
 
-      <h4>List of Assignments</h4>
-      <Table striped bordered hover className="mt-4">
-        <thead>
-          <tr>
-            <th>Course ID</th>
-            <th>Description</th>
-            <th>Assigned At</th>
-            <th>Due By</th>
-          </tr>
-        </thead>
-        <tbody>
-        {renderAssignments()}
+     
+        <LinkContainer to="/view-project">
+           <Button className="my-2 mx-2">View Projects</Button>
+        </LinkContainer>
+      <LinkContainer to="/create-project">
+        <Button className="my-2 mx-2">Create Project</Button>
+      </LinkContainer>
 
-        </tbody>
-      </Table>
+      <LinkContainer to="/edit-student">
+        <Button className="my-2 mx-2">Edit Student Info</Button>
+      </LinkContainer>
+
+      <LinkContainer to="/peer-evaluation">
+        <Button className="my-2 mx-2">Peer Evaluation</Button>
+        </LinkContainer>
+        <LinkContainer to="/view-peerevaluation">
+           <Button className="my-2 mx-2">View Evaluation</Button>
+        </LinkContainer>
     </Container>
-  )
-};export default Dashboard;
+  );
+};

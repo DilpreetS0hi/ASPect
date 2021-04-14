@@ -8,8 +8,10 @@ import Signup from "./Views/Signup";
 import ProjectStatus from "./Views/ProjectStatus";
 import PeerEvaluation from "./Views/PeerEvaluation";
 import CreateProject from "./Views/CreateProject";
+import ViewProjects from "./Views/ViewProjects";
 import EditStudentInfo from "./Views/EditStudentInfo";
 import ForgotPassword from "./Views/ForgotPassword";
+import ViewPeerEvaluation from "./Views/ViewPeerEvaluation";
 import "./custom.css";
 
 export default class App extends Component {
@@ -32,6 +34,8 @@ export default class App extends Component {
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/project-status" component={ProjectStatus} />
         <Route exact path="/create-project" component={CreateProject} />
+        <Route exact path="/view-project" component={ViewProjects} />
+        <Route exact path="/view-peerevaluation" component={ViewPeerEvaluation} />
         <Route
           exact
           path="/edit-student"

@@ -55,7 +55,7 @@ using System;
 
             //If both studentIds are empty return ALL evaluations
             if (peerEvaluaterId == null && peerBeingEvaluatedId == null) {
-                return await _context.PeerEvaluations.ToListAsync();
+                return await _context.PeerEvaluations.Include(i=>i.UserBeingEvaluated).Include(i=>i.UserEvaluating).Include(i=>i.Project).ThenInclude(i=>i.Course).ToListAsync();
             }
 
             //Returns all instances of PeerEvaluations with these two ids if both are included 

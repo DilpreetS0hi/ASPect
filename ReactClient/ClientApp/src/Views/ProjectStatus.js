@@ -1,33 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Container, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
 
-const Projects = (props) => {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    getData()
-  }, [])
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  };
-  
-  const getData = async () => {
-    const { data } = await axios.get(`https://localhost:5001/api/Project/`,
-      config
-    );
-    setProjects(data);
-  }
-
+const ProjectStatus = () => {
   const authenticated =
     localStorage.getItem("id") &&
-      localStorage.getItem("token") &&
-      localStorage.getItem("expiration")
+    localStorage.getItem("token") &&
+    localStorage.getItem("expiration")
       ? true
       : false;
 
@@ -39,50 +18,47 @@ const Projects = (props) => {
     console.log("not logged in");
     history.push("/login");
   }
-  const renderProjects = () => {
-    return (
-      <div>
-        {projects.map((p) => (
-          <div style={{border: '2px solid rgba(0, 0, 150, 0.4)', margin: '5px', padding: "10px", borderRadius: '10px'}}>
-              <h4>App Name</h4>
-              <h6>{p.appName}</h6>
-              <h4>App Description</h4>
-              <h6>{p.description}</h6>
-              <h4>Project ID</h4>
-              <h6>{p.projectId}</h6>
-              <h4>Team Name</h4>
-              <h6>{p.teamName}</h6>
-              <h4>Students</h4>
-              <Table striped bordered hover className="mt-4">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    p.memberships.map((e) => (
-                      <tr>
-                        <td>{e.student.firstName + " " + e.student.lastName}</td>
-                        <td>{e.student.email}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </Table>
-          </div>
-          
-        ))}
-      </div>
-    );
-  }
+
   return (
     <Container>
-      <h1>Projects</h1>
-      {renderProjects()}
+      <h3>Project Status</h3>
+      <div className="mt-3">
+        <p>Project Name: sample project</p>
+        <p>Project Category: sample project category</p>
+      </div>
+
+      <Table striped bordered hover className="mt-4">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Task</th>
+            <th>Created Date</th>
+            <th>Due Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Task A</td>
+            <td>2021-01-01</td>
+            <td>2021-01-11</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Task B</td>
+            <td>2021-01-06</td>
+            <td>2021-02-01</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Task C</td>
+            <td>2021-01-22</td>
+            <td>2021-02-15</td>
+          </tr>
+        </tbody>
+      </Table>
     </Container>
-  )
+  );
 };
 
-export default Projects;
+export default ProjectStatus;

@@ -76,7 +76,7 @@ const EditStudentInfo = ({ studentId }) => {
     if (studentId !== null) {
       const getUserInfo = async () => {
         await axios
-          .get(`https://openaspect.azurewebsites.net/api/Student/${studentId}`)
+           .get(`https://localhost:5001/api/Student/${studentId}`)
           .then((res) => {
             const { firstName, lastName, userName } = res.data;
             setUserInfo({
@@ -125,7 +125,7 @@ const EditStudentInfo = ({ studentId }) => {
 
       try {
         await axios.put(
-          `https://openaspect.azurewebsites.net/api/Student/${studentId}`,
+          `https://localhost:5001/api/Student/${studentId}`,
           values,
           config
         );

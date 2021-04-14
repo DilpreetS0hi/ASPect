@@ -29,11 +29,6 @@ namespace Web.Data
             .WithMany(p => p.Memberships)
             .HasForeignKey(mb => mb.ProjectId);
 
-            builder.Entity<Project>()
-            .HasOne<Offering>(p => p.Offering)
-            .WithMany(p => p.Projects)
-            .HasForeignKey(o => o.OfferingId); 
-
             //builder.Entity<Enrollment>().HasKey(er => new { er.OfferingId, er.Id , er.EnrollmentId});
 
             PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
@@ -45,7 +40,7 @@ namespace Web.Data
             {
                 
                 Name = Constants.ASPectRoles.Admin.RoleName,
-                NormalizedName = Constants.ASPectRoles.Admin.NormalizedName,
+                NormalizedName = Constants.ASPectRoles.Admin.RoleName,
                 Description = Constants.ASPectRoles.Admin.RoleDesc,
                 Id = adminRoleId,
                 ConcurrencyStamp = adminRoleId,
@@ -56,7 +51,7 @@ namespace Web.Data
             var instructorRole = new ApplicationRole()
             {
                 Name = Constants.ASPectRoles.Instructor.RoleName,
-                NormalizedName = Constants.ASPectRoles.Instructor.NormalizedName,
+                NormalizedName = Constants.ASPectRoles.Instructor.RoleName,
                 Description = Constants.ASPectRoles.Instructor.RoleDesc,
                 Id = instructorRoleId,
                 ConcurrencyStamp = instructorRoleId,
@@ -67,7 +62,7 @@ namespace Web.Data
             var studentRole = new ApplicationRole()
             {
                 Name = Constants.ASPectRoles.Student.RoleName,
-                NormalizedName = Constants.ASPectRoles.Student.NormalizedName,
+                NormalizedName = Constants.ASPectRoles.Student.RoleName,
                 Description = Constants.ASPectRoles.Student.RoleDesc,
                 Id = studentRoleId,
                 ConcurrencyStamp = studentRoleId,

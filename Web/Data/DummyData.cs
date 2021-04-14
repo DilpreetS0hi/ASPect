@@ -101,7 +101,7 @@ public static List<Course> GetCourses () {
                 AppName = "Twitter",
                 Description = "An app for tweeting",
                 AspNetUserId = "363624a6-0978-4866-b5ee-b135a6fc3870", // student
-                OfferingId = 1
+                CourseId = 1
             },
             new Project {
                 ProjectId = 2,
@@ -110,16 +110,7 @@ public static List<Course> GetCourses () {
                 AppName = "PlaneGo",
                 Description = "It's like uber but for planes",
                 AspNetUserId = "363624a6-0978-4866-b5ee-b135a6fc3870", // student
-                OfferingId = 1
-            },
-            new Project {
-                ProjectId = 3,
-                TeamName = "Team Fly",
-                ProjectCategoryId = 2,
-                AppName = "PlaneGo",
-                Description = "It's like uber but for planes",
-                AspNetUserId = "363624a6-0978-4866-b5ee-b135a6fc3870", // student
-                OfferingId = 2
+                CourseId = 1
             }
 
         };
@@ -217,10 +208,10 @@ public static List<Course> GetCourses () {
                 OfferingId = 1
             },
             new Enrollment {
-                EnrollmentId = 3,
+                EnrollmentId = 2,
                 //The students id
                 Id = "363624a6-0978-4866-b5ee-b135a6fc3870",
-                OfferingId = 2
+                OfferingId = 1
             }
         };
 
